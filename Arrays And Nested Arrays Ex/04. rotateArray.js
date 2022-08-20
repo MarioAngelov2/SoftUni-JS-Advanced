@@ -4,10 +4,9 @@ function solve(arr, rotations) {
         let el = arr.pop();
         arr.unshift(el);
     }
-
     console.log(arr.join(' '))
-
 }
+
 solve(['1', 
 '2', 
 '3', 
