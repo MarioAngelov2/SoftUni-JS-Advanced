@@ -10,5 +10,4 @@ function solve() {
     newP.textContent = text;
     outputDiv.appendChild(newP);
   }
-  
 }
