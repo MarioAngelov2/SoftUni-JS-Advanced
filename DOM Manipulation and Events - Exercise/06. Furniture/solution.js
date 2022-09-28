@@ -23,9 +23,9 @@ function solve() {
       // name furniture
       let tdFurniture = document.createElement('td');
       let pFurniture = document.createElement('p');
+      pFurniture.textContent = furniture.name;
       tdFurniture.appendChild(pFurniture);
       tr.appendChild(tdFurniture);
-      pFurniture.textContent = furniture.name;
       
       // price
       let tdPrice = document.createElement('td');
