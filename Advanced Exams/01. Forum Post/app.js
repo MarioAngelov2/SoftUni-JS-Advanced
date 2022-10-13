@@ -14,6 +14,27 @@ function solve() {
     if (!titleValue || !categoryValue || !contentValue) {
       return;
     }
-    debugger
+    
+    let li = document.createElement('li');
+    li.className = 'rpost';
+    
+    let article = document.createElement('article');
+    
+    let title = document.createElement('h4', `${titleValue}`);
+    article.appendChild(title);
+
+    let categoryP = document.createElement('p');
+    categoryP.textContent = `Category: ${categoryValue}`
+    article.appendChild(categoryP);
+
+    let contentP = document.createElement('p')
+    contentP.textContent = `Content: ${contentValue}`
+    article.appendChild(contentP);
+
+    li.appendChild(article);
+
+    titleValue.value = '';
+    categoryValue.value = '';
+    contentValue.value = '';
   }
 }
