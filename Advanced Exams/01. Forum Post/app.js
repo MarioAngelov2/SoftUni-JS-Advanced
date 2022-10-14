@@ -2,6 +2,7 @@ window.addEventListener("load", solve);
 
 function solve() {
   document.getElementById('publish-btn').addEventListener('click', createPost);
+  //document.getElementById('clear-btn').addEventListener('click', clearInfo);
   let titleElementInput = document.getElementById('post-title');
   let categoryElementInput = document.getElementById('post-category');
   let contentElementInput = document.getElementById('post-content');
@@ -16,6 +17,7 @@ function solve() {
     }
 
     let ulElement = document.getElementById('review-list');
+    let ulPublishedList = document.getElementById('published-list');
 
     let li = document.createElement('li');
     li.className = 'rpost';
@@ -42,23 +44,46 @@ function solve() {
     editBtn.classList.add('edit');
     editBtn.textContent = 'Edit';
     li.appendChild(editBtn)
+    editBtn.addEventListener('click', editText);
 
     let approveBtn = document.createElement('button');
     approveBtn.classList.add('action-btn');
     approveBtn.classList.add('approve');
     approveBtn.textContent = 'Approve';
     li.appendChild(approveBtn)
+    approveBtn.addEventListener('click', approveText);
 
     titleElementInput.value = '';
     categoryElementInput.value = '';
     contentElementInput.value = '';
 
-    editBtn.addEventListener('click', editText);
 
-    function editText() {
-      titleElementInput.value = title.innerText;
-      categoryElementInput.value = categoryP.innerText;
-      contentElementInput.value = contentP.innerText;
+    function editText(e) {
+      let currentPost = e.target.parentElement;
+
+      titleElementInput.value = title.textContent;
+      categoryElementInput.value = categoryP.textContent.split(': ')[1];
+      contentElementInput.value = contentP.textContent.split(': ')[1];
+
+      currentPost.remove();
+    }
+
+    function approveText(e) {
+      let cuurentInfo = e.target.parentElement;
+
+      ulPublishedList.appendChild(contentP);
+      ulPublishedList.appendChild(categoryP);
+      ulPublishedList.appendChild(title);
+      ulPublishedList.appendChild(article);
+      ulPublishedList.appendChild(li);
+
+      cuurentInfo.remove();
     }
   }
+
+  // function clearInfo(e) {
+  //   let allInfo = e.target.parentElement;
+  //   debugger
+  //   allInfo.remove()
+  // }
 }
