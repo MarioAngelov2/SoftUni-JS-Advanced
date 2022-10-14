@@ -14,13 +14,16 @@ function solve() {
     if (!titleValue || !categoryValue || !contentValue) {
       return;
     }
-    
+
+    let ulElement = document.getElementById('review-list');
+
     let li = document.createElement('li');
     li.className = 'rpost';
-    
+
     let article = document.createElement('article');
-    
-    let title = document.createElement('h4', `${titleValue}`);
+
+    let title = document.createElement('h4');
+    title.textContent = `${titleValue}`;
     article.appendChild(title);
 
     let categoryP = document.createElement('p');
@@ -32,9 +35,30 @@ function solve() {
     article.appendChild(contentP);
 
     li.appendChild(article);
+    ulElement.appendChild(li);
 
-    titleValue.value = '';
-    categoryValue.value = '';
-    contentValue.value = '';
+    let editBtn = document.createElement('button');
+    editBtn.classList.add('action-btn');
+    editBtn.classList.add('edit');
+    editBtn.textContent = 'Edit';
+    li.appendChild(editBtn)
+
+    let approveBtn = document.createElement('button');
+    approveBtn.classList.add('action-btn');
+    approveBtn.classList.add('approve');
+    approveBtn.textContent = 'Approve';
+    li.appendChild(approveBtn)
+
+    titleElementInput.value = '';
+    categoryElementInput.value = '';
+    contentElementInput.value = '';
+
+    editBtn.addEventListener('click', editText);
+
+    function editText() {
+      titleElementInput.value = title.innerText;
+      categoryElementInput.value = categoryP.innerText;
+      contentElementInput.value = contentP.innerText;
+    }
   }
 }
