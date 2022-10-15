@@ -96,11 +96,7 @@ function solve() {
             currentInfo.remove();
         }
     }
-
-   
-
-
-
+    
     function clearFields(firstNameInputElement, lastNameInputElement, emailInputElement, birthInputElement, positionInputElement, salaryInputElement) {
         firstNameInputElement.value = '';
         lastNameInputElement.value = '';
