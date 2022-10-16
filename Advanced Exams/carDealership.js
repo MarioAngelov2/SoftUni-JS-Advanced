@@ -57,13 +57,9 @@ class CarDealership {
             return `There are no available cars`;
         } else {
             let result = '-Available cars:';
-            // result += `-Available cars:\n`;
-            // this.availableCars.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.mileage.toFixed(2)} km - ${car.price.toFixed(2)}$\n` });
-            // return result;
-            this.availableCars.forEach(car => {
-                result.push(`---${car.model} - ${car.horsepower} HP - ${car.mileage.toFixed(2)} km - ${car.price.toFixed(2)}$`)
-            });
-            return result.join('\n')
+            result += `-Available cars:\n`;
+            this.availableCars.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.mileage.toFixed(2)} km - ${car.price.toFixed(2)}$\n` });
+            return result;
         }
     }
 
