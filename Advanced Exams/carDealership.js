@@ -4,6 +4,7 @@ class CarDealership {
         this.availableCars = [];
         this.soldCars = [];
         this.totalIncome = 0;
+        this.soldPrice = 0;
     }
     addCar(model, horsepower, price, mileage) {
 
@@ -20,7 +21,7 @@ class CarDealership {
                 price: price,
                 mileage: mileage
             })
-            return `New car added: ${model} - ${Number(horsepower).toFixed(2)} HP - ${Number(mileage).toFixed(2)} km - ${Number(price).toFixed(2)}$`
+            return `New car added: ${model} - ${horsepower} HP - ${mileage.toFixed(2)} km - ${price.toFixed(2)}$`
         }
     }
 
@@ -40,24 +41,29 @@ class CarDealership {
 
         let index = this.availableCars.indexOf(car);
         this.availableCars.splice(index, 1);
+        this.soldPrice = car.price
         this.soldCars.push({
             model: car.model,
             horsepower: car.horsepower,
             soldPrice: car.price
         });
 
-        this.totalIncome += car.price;
-        return `${model} was sold for ${car.price.toFixed(2)}$`
+        this.totalIncome += this.soldPrice;
+        return `${model} was sold for ${(this.soldPrice).toFixed(2)}$`
     }
 
     currentCar() {
         if (this.availableCars.length === 0) {
             return `There are no available cars`;
         } else {
-            let result = '';
-            result += `-Available cars:\n`;
-            this.availableCars.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.mileage} km - ${car.price}$\n` });
-            return result;
+            let result = '-Available cars:';
+            // result += `-Available cars:\n`;
+            // this.availableCars.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.mileage.toFixed(2)} km - ${car.price.toFixed(2)}$\n` });
+            // return result;
+            this.availableCars.forEach(car => {
+                result.push(`---${car.model} - ${car.horsepower} HP - ${car.mileage.toFixed(2)} km - ${car.price.toFixed(2)}$`)
+            });
+            return result.join('\n')
         }
     }
 
@@ -68,26 +74,26 @@ class CarDealership {
 
         if (criteria === 'horsepower') {
             let result = '';
-            result += `-${dealership.name} has a total income of ${this.totalIncome}$\n`;
+            result += `-${this.name} has a total income of ${(this.totalIncome).toFixed(2)}$\n`;
             result += `-${this.soldCars.length} cars sold:\n`
             let sorted = this.soldCars.sort((a, b) => b.horsepower - a.horsepower)
-            sorted.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.soldPrice}$\n` });
+            sorted.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.soldPrice.toFixed(2)}$\n` });
             return result;
         } else if (criteria === 'model') {
             let result = '';
-            result += `-${dealership.name} has a total income of ${this.totalIncome}$\n`;
+            result += `-${this.name} has a total income of ${(this.totalIncome).toFixed(2)}$\n`;
             result += `-${this.soldCars.length} cars sold:\n`
             let sorted = this.soldCars.sort((a, b) => a.model.localeCompare(b.model));
-            sorted.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.soldPrice}$\n` });
+            sorted.map(car => { result += `---${car.model} - ${car.horsepower} HP - ${car.soldPrice.toFixed(2)}$\n` });
             return result;
         }
     }
 }
 
-let dealership = new CarDealership('SoftAuto');
-console.log(dealership.addCar('Toyota Corolla', 100, 3500, 190000));
-console.log(dealership.addCar('Mercedes C63', 300, 29000, 187000));
-console.log(dealership.addCar('', 120, 4900, 240000));
+// let dealership = new CarDealership('SoftAuto');
+// console.log(dealership.addCar('Toyota Corolla', 100, 3500, 190000));
+// console.log(dealership.addCar('Mercedes C63', 300, 29000, 187000));
+// console.log(dealership.addCar('', 120, 4900, 240000));
 
 // let dealership = new CarDealership('SoftAuto');
 // dealership.addCar('Toyota Corolla', 100, 3500, 190000);
@@ -102,10 +108,10 @@ console.log(dealership.addCar('', 120, 4900, 240000));
 // dealership.addCar('Audi A3', 120, 4900, 240000);
 // console.log(dealership.currentCar());
 
-// let dealership = new CarDealership('SoftAuto');
-// dealership.addCar('Toyota Corolla', 100, 3500, 190000);
-// dealership.addCar('Mercedes C63', 300, 29000, 187000);
-// dealership.addCar('Audi A3', 120, 4900, 240000);
-// dealership.sellCar('Toyota Corolla', 230000);
-// dealership.sellCar('Mercedes C63', 110000);
-// console.log(dealership.salesReport('horsepower'));
+let dealership = new CarDealership('SoftAuto');
+dealership.addCar('Toyota Corolla', 100, 3500, 190000);
+dealership.addCar('Mercedes C63', 300, 29000, 187000);
+dealership.addCar('Audi A3', 120, 4900, 240000);
+dealership.sellCar('Toyota Corolla', 230000);
+dealership.sellCar('Mercedes C63', 110000);
+console.log(dealership.salesReport('horsepower'));
