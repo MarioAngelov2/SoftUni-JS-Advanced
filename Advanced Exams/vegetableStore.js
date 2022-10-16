@@ -16,7 +16,7 @@ class VegetableStore {
                 product.quantity += quantity;
 
                 if (price > product.price) {
-                    product.price += price;
+                    product.price = price;
                 }
             }
             if (!product) {
@@ -55,20 +55,51 @@ class VegetableStore {
     }
 
     rottingVegetable(type, quantity) {
-        
+        quantity = Number(quantity);
+
+        let product = this.availableProducts.find(product => product.type === type);
+
+        if (!product) {
+            throw Error(`${type} is not available in the store.`);
+        }
+
+        if (product.quantity < quantity) {
+            product.quantity = 0;
+            return `The entire quantity of the ${type} has been removed.`
+        } else {
+            product.quantity -= quantity;
+            return `Some quantity of the ${type} has been removed.`
+        }
     }
 
     revision() {
-
+        let result = '';
+        result += `Available vegetables:\n`;
+        let sorted = this.availableProducts.sort((a, b) => a.price - b.price);
+        sorted.map(product => { result += `${product.type}-${product.quantity}-$${product.price}\n` });
+        result += `The owner of the store is ${this.owner}, and the location is ${this.location}.`
+        return result;
     }
 }
 
 // let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
 // console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
 
+// let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
+// console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
+// console.log(vegStore.buyingVegetables(["Okra 1"]));
+// console.log(vegStore.buyingVegetables(["Beans 8", "Okra 1.5"]));
+// console.log(vegStore.buyingVegetables(["Banana 1", "Beans 2"]));
+
+// let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
+// console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
+// console.log(vegStore.rottingVegetable("Okra", 1));
+// console.log(vegStore.rottingVegetable("Okra", 2.5));
+// console.log(vegStore.buyingVegetables(["Beans 8", "Okra 1.5"]));
+
 let vegStore = new VegetableStore("Jerrie Munro", "1463 Pette Kyosheta, Sofia");
 console.log(vegStore.loadingVegetables(["Okra 2.5 3.5", "Beans 10 2.8", "Celery 5.5 2.2", "Celery 0.5 2.5"]));
-console.log(vegStore.buyingVegetables(["Okra 1"]));
-console.log(vegStore.buyingVegetables(["Beans 8", "Okra 1.5"]));
-console.log(vegStore.buyingVegetables(["Banana 1", "Beans 2"]));
-
+console.log(vegStore.rottingVegetable("Okra", 1));
+console.log(vegStore.rottingVegetable("Okra", 2.5));
+console.log(vegStore.buyingVegetables(["Beans 8", "Celery 1.5"]));
+console.log(vegStore.revision());
