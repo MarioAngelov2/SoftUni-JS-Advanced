@@ -79,10 +79,18 @@ class SummerCamp {
     }
 
     toString() {
+        let result = '';
+        result += `${this.organizer} will take ${this.listOfParticipants.length} participants on camping to ${this.location}`;
 
+        this.listOfParticipants.sort((a, b) => a.wins - b.wins)
+        .map(participant => {result += `${participant.name} - ${participant.condition} - ${participant.power} - ${participant.wins}`});
+
+        return result;
     }
 
 }
+
+
 // const summerCamp = new SummerCamp("Jane Austen", "Pancharevo Sofia 1137, Bulgaria");
 // console.log(summerCamp.registerParticipant("Petar Petarson", "student", 200));
 // console.log(summerCamp.registerParticipant("Petar Petarson", "student", 300));
@@ -94,6 +102,14 @@ class SummerCamp {
 // console.log(summerCamp.unregisterParticipant("Petar"));
 // console.log(summerCamp.unregisterParticipant("Petar Petarson"));
 
+// const summerCamp = new SummerCamp("Jane Austen", "Pancharevo Sofia 1137, Bulgaria");
+// console.log(summerCamp.registerParticipant("Petar Petarson", "student", 300));
+// console.log(summerCamp.timeToPlay("Battleship", "Petar Petarson"));
+// console.log(summerCamp.registerParticipant("Sara Dickinson", "child", 200));
+// console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Sara Dickinson"));
+// console.log(summerCamp.registerParticipant("Dimitur Kostov", "student", 300));
+// console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Dimitur Kostov"));
+
 const summerCamp = new SummerCamp("Jane Austen", "Pancharevo Sofia 1137, Bulgaria");
 console.log(summerCamp.registerParticipant("Petar Petarson", "student", 300));
 console.log(summerCamp.timeToPlay("Battleship", "Petar Petarson"));
@@ -101,6 +117,9 @@ console.log(summerCamp.registerParticipant("Sara Dickinson", "child", 200));
 console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Sara Dickinson"));
 console.log(summerCamp.registerParticipant("Dimitur Kostov", "student", 300));
 console.log(summerCamp.timeToPlay("WaterBalloonFights", "Petar Petarson", "Dimitur Kostov"));
+
+console.log(summerCamp.toString());
+
 
 // const participantType = {
 //     Student: 'student',
