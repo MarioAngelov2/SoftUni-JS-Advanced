@@ -32,7 +32,26 @@ class ArtGallery {
     }
 
     inviteGuest(guestName, personality) {
+        let person = this.guests.find(person => person.guestName === guestName);
+        let points = 50;
 
+        if (person) {
+            throw Error(`${guestName} has already been invited.`);
+        } 
+
+        if (personality === 'Vip') {
+            points = 500;
+        } else if (personality === 'Middle') {
+            points = 250;
+        } 
+
+        this.guests.push({
+            guestName: guestName,
+            points: points,
+            purchaseArticle: 0
+        });
+
+        return `You have successfully invited ${guestName}!`
     }
 
     buyArticle(articleModel, articleName, guestName) {
@@ -44,7 +63,12 @@ class ArtGallery {
     }
 }
 
+// const artGallery = new ArtGallery('Curtis Mayfield');
+// console.log(artGallery.addArticle('picture', 'Mona Liza', 3));
+// console.log(artGallery.addArticle('Item', 'Ancient vase', 2));
+// console.log(artGallery.addArticle('PICTURE', 'Mona Liza', 1));
+
 const artGallery = new ArtGallery('Curtis Mayfield');
-console.log(artGallery.addArticle('picture', 'Mona Liza', 3));
-console.log(artGallery.addArticle('Item', 'Ancient vase', 2));
-console.log(artGallery.addArticle('PICTURE', 'Mona Liza', 1));
+console.log(artGallery.inviteGuest('John', 'Vip'));
+console.log(artGallery.inviteGuest('Peter', 'Middle'));
+console.log(artGallery.inviteGuest('John', 'Middle'));
