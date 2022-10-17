@@ -82,7 +82,7 @@ class SummerCamp {
         let result = '';
         result += `${this.organizer} will take ${this.listOfParticipants.length} participants on camping to ${this.location}`;
 
-        this.listOfParticipants.sort((a, b) => a.wins - b.wins)
+        this.listOfParticipants.sort((a, b) => b.wins - a.wins)
         .map(participant => {result += `${participant.name} - ${participant.condition} - ${participant.power} - ${participant.wins}`});
 
         return result;
