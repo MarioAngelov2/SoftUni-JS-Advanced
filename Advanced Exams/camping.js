@@ -19,7 +19,7 @@ class SummerCamp {
 
         if (condition === 'student' && money < this.priceForTheCamp.student) {
             return errorMsg;
-        } else if (condition === 'chiild' && money > this.priceForTheCamp.child) {
+        } else if (condition === 'child' && money > this.priceForTheCamp.child) {
             return errorMsg;
         } else if (condition === 'collegian' && money > this.priceForTheCamp.collegian) {
             return errorMsg;

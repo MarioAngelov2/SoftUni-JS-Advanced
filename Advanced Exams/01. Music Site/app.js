@@ -8,6 +8,8 @@ function solve() {
 
     document.getElementById('add-btn').addEventListener('click', add);
     let divAllHits = document.querySelector('.all-hits-container');
+    let likesValue = document.getElementById('total-likes');
+    let savedSongs = document.querySelector('.saved-container');
 
     function add(ev) {
         ev.preventDefault();
@@ -44,18 +46,40 @@ function solve() {
         saveBtn.classList.add('save-btn');
         saveBtn.textContent = 'Save song';
         div.appendChild(saveBtn);
+        saveBtn.addEventListener('click', save);
 
         let likeBtn = document.createElement('button');
         likeBtn.classList.add('like-btn');
         likeBtn.textContent = 'Like song';
         div.appendChild(likeBtn);
+        likeBtn.addEventListener('click', like);
 
         let deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-btn');
         deleteBtn.textContent = 'Delete';
         div.appendChild(deleteBtn);
+        deleteBtn.addEventListener('click', deleteB);
 
-        clearInput(genreInputElement, nameInputElement, authorInputElement, dateInputElement)
+        clearInput(genreInputElement, nameInputElement, authorInputElement, dateInputElement);
+
+        function like() {
+            let paragraph = likesValue.querySelector('p');
+            let splittedInfo = paragraph.textContent.split(': ');
+            let likes = Number(splittedInfo[1]);
+            likes++;
+            paragraph.textContent = `${splittedInfo[0]}: ${likes}`;
+            likeBtn.setAttribute('disabled', true);
+        }
+
+        function save() {
+            savedSongs.appendChild(div);
+            likeBtn.remove();
+            saveBtn.remove()
+        }
+
+        function deleteB() {
+            div.remove();
+        }
     }
 
     function clearInput(genreInputElement, nameInputElement, authorInputElement, dateInputElement) {
