@@ -7,12 +7,28 @@ class ArtGallery {
     }
 
     addArticle(articleModel, articleName, quantity) {
+        articleModel = articleModel.toLowerCase();
 
-        // if (this.possibleArticles.hasOwnProperty(articleModel)) {
-        //     throw Error(`This article model is not included in this gallery!`);
-        // }
+       let model = Object.keys(this.possibleArticles).find(key => key === articleModel);
 
-        console.log(this.possibleArticles)
+       if (!model) {
+        throw Error(`This article model is not included in this gallery!"`)
+       }
+
+       let name = this.listOfArticles.find(name => name.articleName === articleName);
+
+       if(!name) {
+        this.listOfArticles.push({
+            articleModel: articleModel,
+            articleName: articleName,
+            quantity: quantity
+        })
+       } else {
+            if (articleModel === name.articleModel) {
+                name.quantity += quantity;
+            }
+       }
+       return `Successfully added article ${articleName} with a new quantity- ${quantity}.`
     }
 
     inviteGuest(guestName, personality) {
