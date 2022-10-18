@@ -24,15 +24,30 @@ class Restaurant {
             this.stockProducts.product += quantity;
         }
         return this.history.join('\n')
-
     }
 
     addToMenu(meal, neededProducts, price) {
+        let productList = {};
 
+        for (let el of neededProducts) {
+            let [product, quantity] = el.split(' ');
+            productList[product] = quantity;
+        }
+
+        if (!this.menu.hasOwnProperty(meal)) {
+            this.menu[meal] = { 'products': productList, price };
+            if (Object.keys(this.menu).length === 1) {
+                return `Great idea! Now with the ${meal} we have 1 meal in the menu, other ideas?`
+            } else {
+                return `Great idea! Now with the ${meal} we have ${Object.keys(this.menu).length} meals in the menu, other ideas?`
+            }
+        } else {
+            return `The ${meal} is already in the our menu, try something different.`
+        }
     }
 
     showTheMenu() {
-
+        
     }
 
     makeTheOrder() {
@@ -41,4 +56,9 @@ class Restaurant {
 }
 
 let kitchen = new Restaurant(1000);
-console.log(kitchen.loadProducts(['Banana 10 5', 'Banana 20 10', 'Strawberries 50 30', 'Yogurt 10 10', 'Yogurt 500 1500', 'Honey 5 50']));
+console.log(kitchen.addToMenu('frozenYogurt', ['Yogurt 1', 'Honey 1', 'Banana 1', 'Strawberries 10'], 9.99));
+console.log(kitchen.addToMenu('Pizza', ['Flour 0.5', 'Oil 0.2', 'Yeast 0.5', 'Salt 0.1', 'Sugar 0.1', 'Tomato sauce 0.5', 'Pepperoni 1', 'Cheese 1.5'], 15.55));
+
+
+// let kitchen = new Restaurant(1000);
+// console.log(kitchen.loadProducts(['Banana 10 5', 'Banana 20 10', 'Strawberries 50 30', 'Yogurt 10 10', 'Yogurt 500 1500', 'Honey 5 50']));
