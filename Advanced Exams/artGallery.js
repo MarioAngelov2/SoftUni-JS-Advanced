@@ -54,7 +54,7 @@ class ArtGallery {
     }
 
     buyArticle(articleModel, articleName, guestName) {
-        
+
         let name = this.listOfArticles.find(name => name.articleName === articleName);
 
         if (!name || name.articleModel !== articleModel) {
@@ -81,18 +81,40 @@ class ArtGallery {
     }
 
     showGalleryInfo(criteria) {
-
+        let result = '';
+        if (criteria === 'article') {
+            result += `Articles information:\n`
+            result += `${this.listOfArticles[articleModel]} - ${this.listOfArticles[articleModel]} - ${this.listOfArticles[quantity]}\n`;
+            return result;
+        } else if (criteria === 'guest') {
+            result += `Guests information:`
+            result += `${this.guests[guestName]} - ${this.guests[purchaseArticle]}\n`
+            return result;
+        }
     }
+
 }
+
 const artGallery = new ArtGallery('Curtis Mayfield');
 artGallery.addArticle('picture', 'Mona Liza', 3);
 artGallery.addArticle('Item', 'Ancient vase', 2);
 artGallery.addArticle('picture', 'Mona Liza', 1);
 artGallery.inviteGuest('John', 'Vip');
 artGallery.inviteGuest('Peter', 'Middle');
-console.log(artGallery.buyArticle('picture', 'Mona Liza', 'John'));
-console.log(artGallery.buyArticle('item', 'Ancient vase', 'Peter'));
-console.log(artGallery.buyArticle('item', 'Mona Liza', 'John'));
+artGallery.buyArticle('picture', 'Mona Liza', 'John');
+artGallery.buyArticle('item', 'Ancient vase', 'Peter');
+console.log(artGallery.showGalleryInfo('article'));
+console.log(artGallery.showGalleryInfo('guest'));
+
+// const artGallery = new ArtGallery('Curtis Mayfield');
+// artGallery.addArticle('picture', 'Mona Liza', 3);
+// artGallery.addArticle('Item', 'Ancient vase', 2);
+// artGallery.addArticle('picture', 'Mona Liza', 1);
+// artGallery.inviteGuest('John', 'Vip');
+// artGallery.inviteGuest('Peter', 'Middle');
+// console.log(artGallery.buyArticle('picture', 'Mona Liza', 'John'));
+// console.log(artGallery.buyArticle('item', 'Ancient vase', 'Peter'));
+// console.log(artGallery.buyArticle('item', 'Mona Liza', 'John'));
 
 // const artGallery = new ArtGallery('Curtis Mayfield');
 // console.log(artGallery.addArticle('picture', 'Mona Liza', 3));
