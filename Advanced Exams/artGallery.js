@@ -81,14 +81,17 @@ class ArtGallery {
     }
 
     showGalleryInfo(criteria) {
+        // let articleInfo = this.listOfArticles.find(article => article);
+        // let guestsInfo = this.guests.find(guest => guest);
+
         let result = '';
         if (criteria === 'article') {
             result += `Articles information:\n`
-            result += `${this.listOfArticles[articleModel]} - ${this.listOfArticles[articleModel]} - ${this.listOfArticles[quantity]}\n`;
+            this.listOfArticles.map(article => (result += `${article.articleModel} - ${article.articleName} - ${article.quantity}\n`))
             return result;
         } else if (criteria === 'guest') {
-            result += `Guests information:`
-            result += `${this.guests[guestName]} - ${this.guests[purchaseArticle]}\n`
+            result += `Guests information:\n`
+            this.guests.map(guest => (result += `${guest.guestName} - ${guest.purchaseArticle}\n`))
             return result;
         }
     }
