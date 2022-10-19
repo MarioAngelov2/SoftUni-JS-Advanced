@@ -11,11 +11,10 @@ function solution() {
   let editButton = document.getElementById('editBTN');
   let continueBtn = document.getElementById('continueBTN');
 
-  //continueBtn.addEventListener('click', continueFunc);
   submitButton.addEventListener('click', submit);
   
   let infoPreviewListElement = document.getElementById('infoPreview');
-  let 
+  let divBlock = document.getElementById('block');
   
   function submit(ev) {
     ev.preventDefault();
@@ -47,7 +46,8 @@ function solution() {
     continueBtn.disabled = false;
     
     editButton.addEventListener('click', edit);
-
+    continueBtn.addEventListener('click', continueFunc);
+    
     function edit() {
       let currentInfo = infoPreviewListElement.querySelectorAll('li')
 
@@ -62,6 +62,14 @@ function solution() {
       }
       editButton.disabled = true;
       continueBtn.disabled = true;
+      submitButton.disabled = false;
+    }
+
+    function continueFunc() {
+      divBlock.innerHTML = '';
+      let finalMessage = document.createElement('h3');
+      finalMessage.textContent = `Thank You For Your Reservation!`;
+      divBlock.appendChild(finalMessage)
     }
   }
 
