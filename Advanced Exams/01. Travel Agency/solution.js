@@ -73,8 +73,6 @@ function solution() {
     }
   }
 
- 
-
   function clearInput(fullNameInputElement, emailInputElement, phNumberInputElement, addresInputElement, postCodeInputElement) {
     fullNameInputElement.value = '';
     emailInputElement.value = '';
